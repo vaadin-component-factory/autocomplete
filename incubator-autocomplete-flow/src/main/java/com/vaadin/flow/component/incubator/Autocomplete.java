@@ -101,6 +101,9 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
     /**
      * Sets the limit to the maximum number of displayed options.
      *
+     * <p>
+     * The limit should be bigger than 0.
+     * </p>
      * @param limit maximum number of displayed options
      */
     public void setLimit(int limit) {
@@ -110,10 +113,11 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
     /**
      * Gets the the maximum number of displayed options.
      *
-     * @return limit maximum number of displayed options
+     * @return limit maximum number of displayed options.
+     *               -1 is returned if there is not a limit set.
      */
     public int getLimit() {
-        return getElement().getProperty(LIMIT_PROP, 0);
+        return getElement().getProperty(LIMIT_PROP, -1);
     }
 
 
