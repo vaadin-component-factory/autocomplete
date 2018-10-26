@@ -1,6 +1,5 @@
 # Incubator Autocomplete for Flow
 
-# incubator-autocomplete;
 
 [Live Demo ↗](https://incubator.app.fi/incubator-autocomplete-demo/index.html)
 
@@ -64,9 +63,5 @@ git clone git@github.com/vaadin/incubator-autocomplete-flow.git
 ```
 
 To build and install the project into the local repository run 
-
-```mvn install -DskipITs```
-
-in the root directory. `-DskipITs` will skip the integration tests, which require a TestBench license. If you want to run all tests as part of the build, run
 
 ```mvn install```
