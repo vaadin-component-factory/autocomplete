@@ -100,10 +100,9 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
 
     /**
      * Sets the limit to the maximum number of displayed options.
-     *
      * <p>
      * The limit should be bigger than 0.
-     * </p>
+     *
      * @param limit maximum number of displayed options
      */
     public void setLimit(int limit) {
@@ -136,8 +135,8 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
     /**
      * Checks if there is loading icon in the Autocomplete panel.
      *
-     * @return loading <code>true</code> loading icon is visible
-     * <code>false</code>, otherwise
+     * @return loading  <code>true</code> loading icon is visible
+     *                  <code>false</code>, otherwise
      */
     public boolean isLoading() {
         return getElement().getProperty(LOADING_PROP, false);
@@ -145,13 +144,12 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
 
 
     /**
+     * Gets the placeholder.
      * <p>
      * A placeholder string in addition to the label.
-     * </p>
      * <p>
      * This property is not synchronized automatically from the client side, so
      * the returned value may not be the same as in client side.
-     * </p>
      *
      * @return the {@code placeholder} property from the webcomponent
      */
@@ -160,39 +158,11 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
     }
 
     /**
-     * <p>
-     * String used for the label element.
-     * </p>
-     * <p>
-     * This property is not synchronized automatically from the client side, so
-     * the returned value may not be the same as in client side.
-     * </p>
-     *
-     * @return the {@code label} property from the webcomponent
-     */
-    public String getLabelString() {
-        return getElement().getProperty(LABEL_PROP);
-    }
-
-    /**
-     * <p>
-     * String used for the label element.
-     * </p>
-     *
-     * @param label the String value to set
-     */
-    public void setLabel(String label) {
-        getElement().setProperty(LABEL_PROP, label == null ? "" : label);
-    }
-
-
-    /**
+     * Sets the placeholder.
      * <p>
      * Description copied from corresponding location in WebComponent:
-     * </p>
      * <p>
      * A placeholder string in addition to the label.
-     * </p>
      *
      * @param placeholder the String value to set
      */
@@ -201,6 +171,30 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
                 placeholder == null ? "" : placeholder);
     }
 
+    /**
+     * Gets the label.
+     * <p>
+     * String used for the label element.
+     * <p>
+     * This property is not synchronized automatically from the client side, so
+     * the returned value may not be the same as in client side.
+     *
+     * @return the {@code label} property from the webcomponent
+     */
+    public String getLabel() {
+        return getElement().getProperty(LABEL_PROP);
+    }
+
+    /**
+     * Sets the label.
+     * <p>
+     * String used for the label element.
+     *
+     * @param label the String value to set
+     */
+    public void setLabel(String label) {
+        getElement().setProperty(LABEL_PROP, label == null ? "" : label);
+    }
 
     /**
      * Adds a listener for {@code ValueChangeEvent} events fired by the webcomponent.
@@ -230,15 +224,6 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
      */
     public Registration addValueClearListener(ComponentEventListener<ValueClearEvent> listener) {
         return addListener(ValueClearEvent.class, listener);
-    }
-
-    /**
-     * This model binds properties {@link Autocomplete} and incubator-autocomplete.html
-     */
-    public interface AutocompleteTemplateModel extends TemplateModel {
-        List<String> getOptions();
-
-        void setOptions(List<String> options);
     }
 
     @EventHandler
@@ -291,5 +276,14 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
         public ValueClearEvent(Autocomplete source, boolean fromClient) {
             super(source, fromClient);
         }
+    }
+
+    /**
+     * This model binds properties {@link Autocomplete} and incubator-autocomplete.html
+     */
+    public interface AutocompleteTemplateModel extends TemplateModel {
+        List<String> getOptions();
+
+        void setOptions(List<String> options);
     }
 }
