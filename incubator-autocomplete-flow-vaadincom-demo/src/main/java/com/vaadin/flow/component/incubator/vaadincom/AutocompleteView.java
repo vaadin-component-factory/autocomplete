@@ -18,7 +18,7 @@ import com.vaadin.flow.router.Route;
 /**
  * The main view contains a button and a click listener.
  */
-@Route("")
+@Route("autocomplete")
 public class AutocompleteView extends DemoView {
 
     private final Fairy fairy = Fairy.create();
