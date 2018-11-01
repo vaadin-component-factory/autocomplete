@@ -55,7 +55,7 @@
                         <index>true</index>
                         <manifest>
                             <addClasspath>false</addClasspath>
-                            <!-- Implementation-Title and Implementation-Version 
+                            <!-- Implementation-Title and Implementation-Version
                                 come from the POM by default -->
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
@@ -67,9 +67,9 @@
                             <AdVaaLicen>cval</AdVaaLicen>
                             <AdVaaName>incubator-autocomplete</AdVaaName>
                             <AdVaaPkg>com.vaadin.incubator.autocomplete</AdVaaPkg>
-                            <!-- Implementation-Title and Implementation-Version 
+                            <!-- Implementation-Title and Implementation-Version
                                 come from the POM by default -->
-                            <Implementation-Title>Vaadin Crud</Implementation-Title>
+                            <Implementation-Title>Incubator Autocomplete</Implementation-Title>
                         </manifestEntries>
                     </archive>
                 </configuration>
