@@ -1,8 +1,8 @@
-package com.vaadin.flow.component.incubator;
+package com.vaadin.componentfactory;
 
 /*
  * #%L
- * Vaadin IncubatorAutocomplete for Vaadin 10
+ * VCF Autocomplete for Vaadin 10
  * %%
  * Copyright (C) 2017 - 2018 Vaadin Ltd
  * %%
@@ -34,7 +34,7 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 
 
 /**
- * Server-side component for the <code>incubator-autocomplete</code> element.
+ * Server-side component for the <code>vcf-autocomplete</code> element.
  * <p>
  * Note:
  * isOpened,setOpened and setValue are not supported. The current implementation
@@ -42,8 +42,8 @@ import com.vaadin.flow.templatemodel.TemplateModel;
  *
  * @author Vaadin Ltd
  */
-@Tag("incubator-autocomplete")
-@HtmlImport("bower_components/incubator-autocomplete/src/incubator-autocomplete.html")
+@Tag("vcf-autocomplete")
+@HtmlImport("bower_components/vcf-autocomplete/src/vcf-autocomplete.html")
 public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTemplateModel> {
 
     // PROPERTIES
@@ -252,7 +252,7 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
     /**
      * AutocompleteValueAppliedEvent is created when the user clicks on a option of the Autocompleter.
      */
-    @DomEvent("incubator-autocomplete-value-applied")
+    @DomEvent("vcf-autocomplete-value-applied")
     public static class AutocompleteValueAppliedEvent extends ComponentEvent<Autocomplete> {
 
         private final String value;
@@ -279,7 +279,7 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
     }
 
     /**
-     * This model binds properties {@link Autocomplete} and incubator-autocomplete.html
+     * This model binds properties {@link Autocomplete} and vcf-autocomplete.html
      */
     public interface AutocompleteTemplateModel extends TemplateModel {
         List<String> getOptions();

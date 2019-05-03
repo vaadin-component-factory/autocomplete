@@ -1,11 +1,11 @@
-# Incubator Autocomplete for Flow
+# Autocomplete
 
 
-[Live Demo ↗](https://incubator.app.fi/incubator-autocomplete-demo/index.html)
+[Live Demo ↗](https://incubator.app.fi/autocomplete-demo/autocomplete)
 
-[&lt;incubator-autocomplete&gt;](https://vaadin.com/components/incubator-autocomplete) is a text input with a panel of suggested options.
+[&lt;vcf-autocomplete&gt;](https://vaadin.com/components/autocomplete) is a text input with a panel of suggested options.
 
-&lt;incubator-autocomplete&gt; is built with Vaadin Incubator. To use it, you need to have a access to [Vaadin Incubator](https://vaadin.com/support#incubator), which is included in [Vaadin Prime](https://vaadin.com/pricing).
+&lt;autocomplete&gt; is built with Vaadin Component Factory. To use it, you need to have a access to [Vaadin Prime](https://vaadin.com/pricing).
 
 
 # What does the component do?
@@ -42,7 +42,7 @@ autocomplete.setPlaceholder("search ...");
 
 # How to run the demo?
 
-The Demo can be run going to the project incubator-autocomplete-flow-vaadincom-demo and executing the maven goal:
+The Demo can be run going to the project autocomplete-demo and executing the maven goal:
 
 ```mvn jetty:run```
 
@@ -51,7 +51,7 @@ The Demo can be run going to the project incubator-autocomplete-flow-vaadincom-d
 
 This Add-on is distributed under [Commercial Vaadin Add-on License version 3](http://vaadin.com/license/cval-3) (CVALv3). For license terms, see LICENSE.txt.
 
-Incubator Autocomplete is written by Vaadin Ltd.
+Autocomplete is written by Vaadin Ltd.
 
 
 ## Setting up for development:
@@ -59,7 +59,7 @@ Incubator Autocomplete is written by Vaadin Ltd.
 Clone the project in GitHub (or fork it if you plan on contributing)
 
 ```
-git clone git@github.com/vaadin/incubator-autocomplete-flow.git
+git clone git@github.com/vaadin-component-factory/autocomplete.git
 ```
 
 To build and install the project into the local repository run 

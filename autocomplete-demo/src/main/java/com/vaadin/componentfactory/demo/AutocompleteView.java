@@ -1,4 +1,4 @@
-package com.vaadin.flow.component.incubator.vaadincom;
+package com.vaadin.componentfactory.demo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,8 +10,7 @@ import org.jfairy.producer.person.Person;
 
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H3;
-import com.vaadin.flow.component.incubator.Autocomplete;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.componentfactory.Autocomplete;
 import com.vaadin.flow.demo.DemoView;
 import com.vaadin.flow.router.Route;
 
