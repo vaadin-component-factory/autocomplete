@@ -1,20 +1,16 @@
-# Autocomplete
+# Component Factory Autocomplete for Vaadin 10+
+
+This is server-side component of [&lt;vcf-autocomplete&gt;](https://github.com/vaadin-component-factory/vcf-autocomplete) Web Component.
+Autocomplete is a text input with a panel of suggested options. When user change value of text input, panel with found options will be shown, so user can select one of the suggested options. Once user selected his option, it appears in text input. 
 
 
 [Live Demo ↗](https://incubator.app.fi/autocomplete-demo/autocomplete)
 
-[&lt;vcf-autocomplete&gt;](https://vaadin.com/components/autocomplete) is a text input with a panel of suggested options.
+## Usage
 
-&lt;autocomplete&gt; is built with Vaadin Component Factory. To use it, you need to have a access to [Vaadin Prime](https://vaadin.com/pricing).
+A simple use of the Autocomplete component would be the following: create autocomplete, add change listener in which you will add 
+options to autocomplete, according to users input.
 
-
-# What does the component do?
-
-Autocomplete is a Web Component providing an easy way to provide an autocomplete functionality.
-
-# How is it used?
-
-A simple use of the Autocomplete component would be the following.
 ```java
 H3 inputH3 = new H3("Current input: ");
 H3 selectionH3 = new H3("Selection: ");
@@ -38,30 +34,30 @@ autocomplete.setLabel("Find what you want:");
 autocomplete.setPlaceholder("search ...");
 ```
 
-
-
-# How to run the demo?
-
-The Demo can be run going to the project autocomplete-demo and executing the maven goal:
-
-```mvn jetty:run```
-
-
-## License & Author
-
-This Add-on is distributed under [Commercial Vaadin Add-on License version 3](http://vaadin.com/license/cval-3) (CVALv3). For license terms, see LICENSE.txt.
-
-Autocomplete is written by Vaadin Ltd.
-
-
 ## Setting up for development:
 
 Clone the project in GitHub (or fork it if you plan on contributing)
 
 ```
-git clone git@github.com/vaadin-component-factory/autocomplete.git
+git clone git@github.com:vaadin-component-factory/autocomplete.git
 ```
 
-To build and install the project into the local repository run 
-
+to install project, to your maven repository run
+ 
 ```mvn install```
+
+
+## How to run the demo?
+
+The Demo can be run going to the project `autocomplete-demo` and executing the maven goal:
+
+```mvn jetty:run```
+
+
+# Vaadin Prime
+This component is available in Vaadin Prime subscription. It is still open source, but you need to have a valid CVAL license in order to use it. Read more at: https://vaadin.com/pricing
+
+# License & Author
+This Add-on is distributed under [Commercial Vaadin Add-on License version 3](http://vaadin.com/license/cval-3) (CVALv3). For license terms, see LICENSE.txt.
+
+Autocomplete is written by Vaadin Ltd.
