@@ -3,13 +3,6 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>com.vaadin</groupId>
-		<artifactId>vaadin-parent</artifactId>
-		<version>2.0.0</version>
-		<relativePath />
-	</parent>
-
 	<groupId>com.vaadin.componentfactory</groupId>
 	<artifactId>autocomplete-root</artifactId>
 	<packaging>pom</packaging>
@@ -31,9 +24,22 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
+	<distributionManagement>
+		<snapshotRepository>
+			<id>vaadin-snapshots</id>
+			<name>Vaadin snapshot repository</name>
+			<url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>vaadin-addons</id>
+			<name>Vaadin add-ons repository</name>
+			<url>http://tools.vaadin.com/nexus/content/repositories/vaadin-addons</url>
+		</repository>
+	</distributionManagement>
+
 	<modules>
-		<module>autocomplete</module>
-		<module>autocomplete-demo</module>
+		<!--<module>autocomplete</module>-->
+		<!--<module>autocomplete-demo</module>-->
 	</modules>
 	<repositories>
 		<repository>
@@ -66,4 +72,11 @@
 			<artifactId>vaadin-core</artifactId>
 		</dependency>
 	</dependencies>
+
+	<licenses>
+		<license>
+			<name>CVALv3</name>
+			<url>https://vaadin.com/license/cval-3</url>
+		</license>
+	</licenses>
 </project>
