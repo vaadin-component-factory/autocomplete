@@ -38,8 +38,8 @@
 	</distributionManagement>
 
 	<modules>
-		<!--<module>autocomplete</module>-->
-		<!--<module>autocomplete-demo</module>-->
+		<module>autocomplete</module>
+		<module>autocomplete-demo</module>
 	</modules>
 	<repositories>
 		<repository>
