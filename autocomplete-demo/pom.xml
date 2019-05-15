@@ -3,22 +3,46 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.vaadin.componentfactory</groupId>
-        <artifactId>autocomplete-root</artifactId>
-        <version>1.2.0</version>
-    </parent>
-
+    <groupId>com.vaadin.componentfactory</groupId>
     <artifactId>autocomplete-demo</artifactId>
     <packaging>war</packaging>
-
+    <version>1.2.0</version>
     <name>Autocomplete Demo</name>
+    <inceptionYear>2018</inceptionYear>
+
+    <organization>
+        <name>Vaadin Ltd</name>
+        <url>http://vaadin.com/</url>
+    </organization>
 
     <properties>
         <failOnMissingWebXml>false</failOnMissingWebXml>
+        <vaadin.version>10.0.6</vaadin.version>
+        <flow.version>1.0.5</flow.version>
+        <testbench.version>6.0.1</testbench.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${vaadin.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-core</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>flow-component-demo-helpers</artifactId>

@@ -24,54 +24,24 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>vaadin-snapshots</id>
-			<name>Vaadin snapshot repository</name>
-			<url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
-		</snapshotRepository>
-		<repository>
-			<id>vaadin-addons</id>
-			<name>Vaadin add-ons repository</name>
-			<url>http://tools.vaadin.com/nexus/content/repositories/vaadin-addons</url>
-		</repository>
-	</distributionManagement>
-
 	<modules>
 		<module>autocomplete</module>
 		<module>autocomplete-demo</module>
 	</modules>
+
 	<repositories>
 		<repository>
 			<id>vaadin-prereleases</id>
 			<url>http://maven.vaadin.com/vaadin-prereleases</url>
 		</repository>
 	</repositories>
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>vaadin-prereleases</id>
 			<url>http://maven.vaadin.com/vaadin-prereleases</url>
 		</pluginRepository>
 	</pluginRepositories>
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-bom</artifactId>
-				<type>pom</type>
-				<scope>import</scope>
-				<version>${vaadin.version}</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
-	<dependencies>
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-core</artifactId>
-		</dependency>
-	</dependencies>
 
 	<licenses>
 		<license>
