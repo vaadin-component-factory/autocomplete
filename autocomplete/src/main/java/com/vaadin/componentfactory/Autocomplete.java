@@ -27,6 +27,8 @@ import com.vaadin.flow.component.EventData;
 import com.vaadin.flow.component.Synchronize;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.polymertemplate.EventHandler;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.shared.Registration;
@@ -44,6 +46,8 @@ import com.vaadin.flow.templatemodel.TemplateModel;
  */
 @Tag("vcf-autocomplete")
 @HtmlImport("bower_components/vcf-autocomplete/src/vcf-autocomplete.html")
+@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "1.2.0")
+@JsModule("@vaadin-component-factory/vcf-autocomplete/src/vcf-autocomplete.js")
 public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTemplateModel> {
 
     // PROPERTIES
