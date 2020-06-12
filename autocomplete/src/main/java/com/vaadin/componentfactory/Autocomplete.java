@@ -24,13 +24,17 @@ import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.DomEvent;
 import com.vaadin.flow.component.EventData;
+import com.vaadin.flow.component.HasSize;
+import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.Synchronize;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.polymertemplate.EventHandler;
+import com.vaadin.flow.component.polymertemplate.Id;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.templatemodel.TemplateModel;
 
@@ -48,7 +52,7 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 @HtmlImport("bower_components/vcf-autocomplete/src/vcf-autocomplete.html")
 @NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "1.2.0")
 @JsModule("@vaadin-component-factory/vcf-autocomplete/src/vcf-autocomplete.js")
-public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTemplateModel> {
+public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTemplateModel> implements HasSize {
 
     // PROPERTIES
     private static final String VALUE_PROP = "value";
@@ -57,10 +61,14 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
     private static final String LABEL_PROP = "label";
     private static final String PLACEHOLDER_PROP = "placeholder";
 
+    @Id
+    private TextField textField;
+    
     /**
      * Default constructor.
      */
     public Autocomplete() {
+    	textField.setSizeFull();
     }
 
     /**
@@ -69,6 +77,7 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
      * @param limit maximum number of displayed options
      */
     public Autocomplete(int limit) {
+        this();
         setLimit(limit);
     }
 
@@ -231,7 +240,7 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
     }
 
     @EventHandler
-    private void clear() {
+    public void clear() {
         fireEvent(new ValueClearEvent(this,true));
     }
 
@@ -289,5 +298,9 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
         List<String> getOptions();
 
         void setOptions(List<String> options);
+    }
+
+    public void setValue(String value) {
+    	getElement().executeJs("this._applyValue(\""+value+"\");");
     }
 }

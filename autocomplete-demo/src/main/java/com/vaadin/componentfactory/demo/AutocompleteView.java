@@ -57,6 +57,8 @@ public class AutocompleteView extends DemoView {
         autocomplete.setLabel("Find what you want:");
         autocomplete.setPlaceholder("search ...");
 
+        autocomplete.setWidth("300px");
+        autocomplete.setValue("sa");
         addCard("Basic Autocomplete",inputH3,selectionH3,autocomplete);
     }
 
