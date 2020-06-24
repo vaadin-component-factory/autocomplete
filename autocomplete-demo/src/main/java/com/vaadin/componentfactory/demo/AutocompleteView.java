@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.jfairy.Fairy;
 import org.jfairy.producer.person.Person;
 
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.componentfactory.Autocomplete;
@@ -24,6 +25,8 @@ public class AutocompleteView extends DemoView {
 
     private final List<Person> people = createPeople(100);
     private Grid<Person> peopleGrid;
+
+	private boolean startsWith = true;
 
     public AutocompleteView() {
 
@@ -58,8 +61,13 @@ public class AutocompleteView extends DemoView {
         autocomplete.setPlaceholder("search ...");
 
         autocomplete.setWidth("300px");
-        autocomplete.setValue("sa");
-        addCard("Basic Autocomplete",inputH3,selectionH3,autocomplete);
+        Checkbox startsWithBox = new Checkbox("startsWith / contains");
+        startsWithBox.setValue(true);
+        startsWithBox.addValueChangeListener(event -> {
+        	startsWith = event.getValue();
+        });
+        
+        addCard("Basic Autocomplete",inputH3,selectionH3,autocomplete,startsWithBox);
     }
 
     private void createExampleAutocompleteAndGrid(){
@@ -122,8 +130,11 @@ public class AutocompleteView extends DemoView {
             if (person != null) {
                 String name = person.firstName();
                 name = (name == null) ? "" : name.toLowerCase();
-
-                return name.startsWith(matchText);
+				if (startsWith) {
+                	return name.startsWith(matchText);
+                } else {
+                	return name.contains(matchText);
+                }
             }
             return false;
         }).collect(Collectors.toList());

@@ -50,7 +50,7 @@ import com.vaadin.flow.templatemodel.TemplateModel;
  */
 @Tag("vcf-autocomplete")
 @HtmlImport("bower_components/vcf-autocomplete/src/vcf-autocomplete.html")
-@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "1.2.0")
+@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "1.2.2")
 @JsModule("@vaadin-component-factory/vcf-autocomplete/src/vcf-autocomplete.js")
 public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTemplateModel> implements HasSize {
 
