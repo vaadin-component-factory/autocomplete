@@ -50,7 +50,7 @@ import com.vaadin.flow.templatemodel.TemplateModel;
  */
 @Tag("vcf-autocomplete")
 @HtmlImport("bower_components/vcf-autocomplete/src/vcf-autocomplete.html")
-@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "1.2.2")
+@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "1.2.3")
 @JsModule("@vaadin-component-factory/vcf-autocomplete/src/vcf-autocomplete.js")
 public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTemplateModel> implements HasSize {
 
@@ -60,6 +60,7 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
     private static final String LOADING_PROP = "loading";
     private static final String LABEL_PROP = "label";
     private static final String PLACEHOLDER_PROP = "placeholder";
+    private static final String CASESENSITIVE_PROP = "caseSensitive";
 
     @Id
     private TextField textField;
@@ -130,6 +131,25 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
      */
     public int getLimit() {
         return getElement().getProperty(LIMIT_PROP, -1);
+    }
+
+
+    /**
+     * Sets the highlight to be case sensitive or not 
+     *
+     * @param caseSensitive true = case sensitive highlighting
+     */
+    public void setCaseSensitive(boolean caseSensitive) {
+        getElement().setProperty(CASESENSITIVE_PROP, caseSensitive);
+    }
+
+    /**
+     * Gets the current mode of highlighting
+     *
+     * @return boolean value
+     */
+    public boolean isCaseSensitive() {
+        return getElement().getProperty(CASESENSITIVE_PROP, false);
     }
 
 
