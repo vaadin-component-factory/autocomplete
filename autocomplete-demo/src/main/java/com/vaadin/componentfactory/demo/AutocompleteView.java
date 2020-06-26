@@ -49,7 +49,7 @@ public class AutocompleteView extends DemoView {
             inputH3.setText("Current input: " + text);
         });
 
-        autocomplete.addAutocompleteValueAppliedListener(event -> {
+        autocomplete.addValueChangeListener(event -> {
             selectionH3.setText("Selection: " + event.getValue());
         });
 
@@ -66,8 +66,14 @@ public class AutocompleteView extends DemoView {
         startsWithBox.addValueChangeListener(event -> {
         	startsWith = event.getValue();
         });
+
+        Checkbox readOnlyBox = new Checkbox("readOnly");
+        readOnlyBox.setValue(false);
+        readOnlyBox.addValueChangeListener(event -> {
+        	autocomplete.setReadOnly(event.getValue());
+        });
         
-        addCard("Basic Autocomplete",inputH3,selectionH3,autocomplete,startsWithBox);
+        addCard("Basic Autocomplete",inputH3,selectionH3,autocomplete,startsWithBox,readOnlyBox);
     }
 
     private void createExampleAutocompleteAndGrid(){
@@ -83,7 +89,7 @@ public class AutocompleteView extends DemoView {
             autocomplete.setOptions(findOptions(text));
         });
 
-        autocomplete.addAutocompleteValueAppliedListener(event -> {
+        autocomplete.addValueChangeListener(event -> {
             refreshContent(event.getValue());
         });
 

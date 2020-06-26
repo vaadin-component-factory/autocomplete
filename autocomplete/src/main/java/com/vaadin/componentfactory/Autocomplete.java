@@ -37,7 +37,7 @@ import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.templatemodel.TemplateModel;
-
+import com.vaadin.componentfactory.Autocomplete.AutocompleteValueAppliedEvent;
 
 /**
  * Server-side component for the <code>vcf-autocomplete</code> element.
@@ -52,7 +52,7 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 @HtmlImport("bower_components/vcf-autocomplete/src/vcf-autocomplete.html")
 @NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "1.2.3")
 @JsModule("@vaadin-component-factory/vcf-autocomplete/src/vcf-autocomplete.js")
-public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTemplateModel> implements HasSize {
+public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTemplateModel> implements HasSize, HasValue<AutocompleteValueAppliedEvent,String> {
 
     // PROPERTIES
     private static final String VALUE_PROP = "value";
@@ -235,8 +235,8 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
      * @param listener the listener
      * @return a {@link Registration} for removing the event listener
      */
-    public Registration addChangeListener(ComponentEventListener<ValueChangeEvent> listener) {
-        return addListener(ValueChangeEvent.class, listener);
+    public Registration addChangeListener(ComponentEventListener<AucompleteChangeEvent> listener) {
+        return addListener(AucompleteChangeEvent.class, listener);
     }
 
     /**
@@ -265,14 +265,14 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
     }
 
     /**
-     * ValueChangeEvent is created when the value of the TestField changes.
+     * ValueChangeEvent is created when the value of the TextField changes.
      */
     @DomEvent("value-changed")
-    public static class ValueChangeEvent extends ComponentEvent<Autocomplete> {
+    public static class AucompleteChangeEvent extends ComponentEvent<Autocomplete> {
 
         private final String value;
 
-        public ValueChangeEvent(Autocomplete source, boolean fromClient, @EventData("event.detail.value") String value) {
+        public AucompleteChangeEvent(Autocomplete source, boolean fromClient, @EventData("event.detail.value") String value) {
             super(source, fromClient);
             this.value = value;
         }
@@ -286,18 +286,32 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
      * AutocompleteValueAppliedEvent is created when the user clicks on a option of the Autocompleter.
      */
     @DomEvent("vcf-autocomplete-value-applied")
-    public static class AutocompleteValueAppliedEvent extends ComponentEvent<Autocomplete> {
+    public static class AutocompleteValueAppliedEvent extends ComponentEvent<Autocomplete> implements HasValue.ValueChangeEvent<String> {
 
         private final String value;
 
         public AutocompleteValueAppliedEvent(Autocomplete source, boolean fromClient, @EventData("event.detail.value") String value) {
-            super(source, fromClient);
+            super(source,fromClient);
             this.value = value;
+            this.source = source;
         }
 
         public String getValue() {
             return value;
         }
+
+		@Override
+		public HasValue getHasValue() {
+			// TODO Auto-generated method stub
+			return (HasValue) source;
+		}
+
+		@Override
+		public String getOldValue() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
     }
 
     /**
@@ -323,4 +337,38 @@ public class Autocomplete extends PolymerTemplate<Autocomplete.AutocompleteTempl
     public void setValue(String value) {
     	getElement().executeJs("this._applyValue(\""+value+"\");");
     }
+
+	@Override
+	public void setReadOnly(boolean readOnly) {
+		if (readOnly) {
+			getElement().getStyle().set("pointer-events","none");
+		} else {
+			getElement().getStyle().set("pointer-events","auto");
+		}
+		textField.setReadOnly(readOnly);		
+	}
+
+	@Override
+	public boolean isReadOnly() {
+		return textField.isReadOnly();
+	}
+
+	@Override
+	public void setRequiredIndicatorVisible(boolean requiredIndicatorVisible) {
+		textField.setRequiredIndicatorVisible(requiredIndicatorVisible);		
+	}
+
+	@Override
+	public boolean isRequiredIndicatorVisible() {
+		return textField.isRequiredIndicatorVisible();
+	}
+
+	@Override
+	public Registration addValueChangeListener(
+            ValueChangeListener<? super AutocompleteValueAppliedEvent> listener) {
+        return addAutocompleteValueAppliedListener(event -> {
+        	listener.valueChanged(event);
+        });
+	}
+	
 }
