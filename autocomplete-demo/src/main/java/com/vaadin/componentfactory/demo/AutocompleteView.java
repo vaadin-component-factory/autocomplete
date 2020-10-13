@@ -8,7 +8,9 @@ import java.util.stream.Collectors;
 import org.jfairy.Fairy;
 import org.jfairy.producer.person.Person;
 
+import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.componentfactory.Autocomplete;
@@ -19,6 +21,7 @@ import com.vaadin.flow.router.Route;
  * The main view contains a button and a click listener.
  */
 @Route("autocomplete")
+@CssImport( value = "./styles/test.css", themeFor = "vaadin-text-field")
 public class AutocompleteView extends DemoView {
 
     private final Fairy fairy = Fairy.create();
@@ -61,6 +64,8 @@ public class AutocompleteView extends DemoView {
         autocomplete.setPlaceholder("search ...");
 
         autocomplete.setWidth("300px");
+        autocomplete.setThemeName("my-autocomplete");
+
         Checkbox startsWithBox = new Checkbox("startsWith / contains");
         startsWithBox.setValue(true);
         startsWithBox.addValueChangeListener(event -> {
@@ -71,9 +76,11 @@ public class AutocompleteView extends DemoView {
         readOnlyBox.setValue(false);
         readOnlyBox.addValueChangeListener(event -> {
         	autocomplete.setReadOnly(event.getValue());
+            autocomplete.focus();
         });
-        
+        		
         addCard("Basic Autocomplete",inputH3,selectionH3,autocomplete,startsWithBox,readOnlyBox);
+        autocomplete.focus();
     }
 
     private void createExampleAutocompleteAndGrid(){
@@ -89,7 +96,7 @@ public class AutocompleteView extends DemoView {
             autocomplete.setOptions(findOptions(text));
         });
 
-        autocomplete.addValueChangeListener(event -> {
+        autocomplete.addChangeListener(event -> {
             refreshContent(event.getValue());
         });
 
