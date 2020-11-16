@@ -55,8 +55,7 @@ import com.vaadin.componentfactory.Autocomplete.AutocompleteValueAppliedEvent;
  * @author Vaadin Ltd
  */
 @Tag("vcf-autocomplete")
-@HtmlImport("bower_components/vcf-autocomplete/src/vcf-autocomplete.html")
-@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "1.2.6")
+@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "1.2.7")
 @JsModule("@vaadin-component-factory/vcf-autocomplete/src/vcf-autocomplete.js")
 public class Autocomplete extends
         PolymerTemplate<Autocomplete.AutocompleteTemplateModel> implements
