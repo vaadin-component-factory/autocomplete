@@ -1,41 +1,7 @@
 package com.vaadin.componentfactory;
 
-import java.util.Collection;
-
-/*
- * #%L
- * VCF Autocomplete for Vaadin 10
- * %%
- * Copyright (C) 2017 - 2018 Vaadin Ltd
- * %%
- * This program is available under Commercial Vaadin Add-On License 3.0
- * (CVALv3).
- *
- * See the file license.html distributed with this software for more
- * information about licensing.
- *
- * You should have received a copy of the CVALv3 along with this program.
- * If not, see <http://vaadin.com/license/cval-3>.
- * #L%
- */
-
-import java.util.List;
-
-import com.vaadin.flow.component.ComponentEvent;
-import com.vaadin.flow.component.ComponentEventListener;
-import com.vaadin.flow.component.DomEvent;
-import com.vaadin.flow.component.EventData;
-import com.vaadin.flow.component.Focusable;
-import com.vaadin.flow.component.HasSize;
-import com.vaadin.flow.component.HasTheme;
-import com.vaadin.flow.component.HasValidation;
-import com.vaadin.flow.component.HasValue;
-import com.vaadin.flow.component.Key;
-import com.vaadin.flow.component.KeyModifier;
-import com.vaadin.flow.component.ShortcutRegistration;
-import com.vaadin.flow.component.Synchronize;
-import com.vaadin.flow.component.Tag;
-import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.componentfactory.Autocomplete.AutocompleteValueAppliedEvent;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.polymertemplate.EventHandler;
@@ -44,7 +10,28 @@ import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.templatemodel.TemplateModel;
-import com.vaadin.componentfactory.Autocomplete.AutocompleteValueAppliedEvent;
+
+import java.util.List;
+
+/*
+ * #%L
+ * VCF Autocomplete for Vaadin 10
+ * %%
+ * Copyright (C) 2021 Vaadin Ltd
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 
 /**
  * Server-side component for the <code>vcf-autocomplete</code> element.
@@ -55,7 +42,7 @@ import com.vaadin.componentfactory.Autocomplete.AutocompleteValueAppliedEvent;
  * @author Vaadin Ltd
  */
 @Tag("vcf-autocomplete")
-@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "1.2.7")
+@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "1.2.8")
 @JsModule("@vaadin-component-factory/vcf-autocomplete/src/vcf-autocomplete.js")
 public class Autocomplete extends
         PolymerTemplate<Autocomplete.AutocompleteTemplateModel> implements
