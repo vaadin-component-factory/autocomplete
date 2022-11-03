@@ -42,7 +42,7 @@ import java.util.List;
  * @author Vaadin Ltd
  */
 @Tag("vcf-autocomplete")
-@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "1.2.8")
+@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "1.2.10")
 @JsModule("@vaadin-component-factory/vcf-autocomplete/src/vcf-autocomplete.js")
 public class Autocomplete extends
         PolymerTemplate<Autocomplete.AutocompleteTemplateModel> implements
