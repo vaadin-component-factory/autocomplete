@@ -6,7 +6,7 @@
     <groupId>com.vaadin.componentfactory</groupId>
     <artifactId>autocomplete-demo</artifactId>
     <packaging>war</packaging>
-    <version>2.3.2</version>
+    <version>3.0.0</version>
     <name>Autocomplete Demo</name>
     <inceptionYear>2018</inceptionYear>
 
@@ -17,10 +17,9 @@
 
     <properties>
         <failOnMissingWebXml>false</failOnMissingWebXml>
-        <vaadin.version>23.2.6</vaadin.version>
-        <flow.version>2.6.3</flow.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <vaadin.version>24.0.5</vaadin.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -77,7 +76,7 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.46.v20220331</version>
+                <version>11.0.15</version>
                 <configuration>
                     <scanIntervalSeconds>1</scanIntervalSeconds>
                 </configuration>
@@ -89,6 +88,18 @@
                 <configuration>
                     <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-maven-plugin</artifactId>
+                <version>${vaadin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                          <goal>prepare-frontend</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

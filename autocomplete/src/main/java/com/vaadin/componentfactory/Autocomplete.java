@@ -4,14 +4,16 @@ import com.vaadin.componentfactory.Autocomplete.AutocompleteValueAppliedEvent;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
-import com.vaadin.flow.component.polymertemplate.EventHandler;
-import com.vaadin.flow.component.polymertemplate.Id;
-import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.shared.Registration;
-import com.vaadin.flow.templatemodel.TemplateModel;
 
+import elemental.json.JsonArray;
+import elemental.json.JsonFactory;
+import elemental.json.JsonValue;
+import elemental.json.impl.JreJsonFactory;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /*
  * #%L
@@ -42,10 +44,9 @@ import java.util.List;
  * @author Vaadin Ltd
  */
 @Tag("vcf-autocomplete")
-@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "1.2.10")
+@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "2.0.0")
 @JsModule("@vaadin-component-factory/vcf-autocomplete/src/vcf-autocomplete.js")
-public class Autocomplete extends
-        PolymerTemplate<Autocomplete.AutocompleteTemplateModel> implements
+public class Autocomplete extends Component implements
         HasTheme, HasSize, HasValue<AutocompleteValueAppliedEvent, String>,
         Focusable<Autocomplete>, HasValidation {
 
@@ -56,18 +57,43 @@ public class Autocomplete extends
     private static final String LABEL_PROP = "label";
     private static final String PLACEHOLDER_PROP = "placeholder";
     private static final String CASESENSITIVE_PROP = "caseSensitive";
+    private static final String OPTIONS = "options";
 
-    @Id
-    private TextField textField;
+    // Component state attributes
+    private boolean readOnly;
+    private boolean requiredIndicatorVisible;
+    private boolean invalid;
+    private int tabIndex;
+    private String errorMessage;
+
+    // ShadowRoot selector
+    private static final String TEXTFIELD_SELECTOR = "this.$.textField";
+
+    private final Registration clearHandle;
 
     /**
      * Default constructor.
      */
     public Autocomplete() {
-        textField.setSizeFull();
+        getElement().executeJs(String.format("textFieldStyles = %s.style;%s%s",
+                TEXTFIELD_SELECTOR, "textFieldStyles.width='100%';",
+                "textFieldStyles.height='100%';"));
+
+        clearHandle = addChangeListener(e -> {
+            String value = e.getValue();
+            if("".equals(value)) {
+                clear();
+            }
+        });
     }
 
-    /**
+    @Override
+    protected void onDetach(DetachEvent detachEvent) {
+        clearHandle.remove();
+    }
+
+
+  /**
      * Constructor that sets the maximum number of displayed options.
      *
      * @param limit
@@ -94,11 +120,15 @@ public class Autocomplete extends
      * <p>
      * The maximum displayed options will be lower-equal to the set limit.
      *
-     * @param options
-     *            Hints/options to the user
+     * @param options Hints/options to the user
      */
     public void setOptions(List<String> options) {
-        getModel().setOptions(options);
+        JsonFactory jsonFactory = new JreJsonFactory();
+        JsonArray jsonArray = jsonFactory.createArray();
+        for (int i = 0; i < options.size(); i++) {
+            jsonArray.set(i, options.get(i));
+        }
+        getElement().setPropertyJson(OPTIONS, jsonArray);
     }
 
     /**
@@ -107,7 +137,13 @@ public class Autocomplete extends
      * @return options list of options/hints/suggestions
      */
     public List<String> getOptions() {
-        return getModel().getOptions();
+        List<String> result = new ArrayList<>();
+        JsonValue propertyRaw = (JsonValue) getElement().getPropertyRaw("options");
+        JsonArray jsonArray = (JsonArray) propertyRaw;
+        for(int i=0; i < jsonArray.length(); i++) {
+            result.add(jsonArray.getString(i));
+        }
+        return result;
     }
 
     /**
@@ -267,7 +303,6 @@ public class Autocomplete extends
         return addListener(ValueClearEvent.class, listener);
     }
 
-    @EventHandler
     public void clear() {
         fireEvent(new ValueClearEvent(this, true));
     }
@@ -340,43 +375,35 @@ public class Autocomplete extends
         }
     }
 
-    /**
-     * This model binds properties {@link Autocomplete} and
-     * vcf-autocomplete.html
-     */
-    public interface AutocompleteTemplateModel extends TemplateModel {
-        List<String> getOptions();
-
-        void setOptions(List<String> options);
-    }
-
     public void setValue(String value) {
         getElement().executeJs("this._applyValue(\"" + value + "\");");
     }
 
     @Override
     public void setReadOnly(boolean readOnly) {
+        this.readOnly = readOnly;
         if (readOnly) {
             getElement().getStyle().set("pointer-events", "none");
         } else {
             getElement().getStyle().set("pointer-events", "auto");
         }
-        textField.setReadOnly(readOnly);
+        getElement().executeJs(String.format("%s.readonly=$0", TEXTFIELD_SELECTOR), readOnly);
     }
 
     @Override
     public boolean isReadOnly() {
-        return textField.isReadOnly();
+        return this.readOnly;
     }
 
     @Override
     public void setRequiredIndicatorVisible(boolean requiredIndicatorVisible) {
-        textField.setRequiredIndicatorVisible(requiredIndicatorVisible);
+        this.requiredIndicatorVisible = requiredIndicatorVisible;
+        getElement().executeJs(String.format("%s.required=$0", TEXTFIELD_SELECTOR), requiredIndicatorVisible);
     }
 
     @Override
     public boolean isRequiredIndicatorVisible() {
-        return textField.isRequiredIndicatorVisible();
+        return this.requiredIndicatorVisible;
     }
 
     @Override
@@ -389,65 +416,52 @@ public class Autocomplete extends
 
     @Override
     public String getErrorMessage() {
-        if (textField != null) {
-            return textField.getErrorMessage();
-        } else {
-            return null;
-        }
+        return Objects.nonNull(this.errorMessage) ? this.errorMessage : "";
     }
 
     @Override
     public boolean isInvalid() {
-        if (textField != null) {
-            return textField.isInvalid();
-        } else {
-            return false;
-        }
+        return this.invalid;
     }
 
     @Override
     public void setErrorMessage(String errorMessage) {
-        if (textField != null) {
-            textField.setErrorMessage(errorMessage);
-        }
+        this.errorMessage = errorMessage;
+        getElement().executeJs(String.format("%s.errorMessage=$0", TEXTFIELD_SELECTOR), errorMessage);
     }
 
     @Override
     public void setInvalid(boolean invalid) {
-        if (textField != null) {
-            textField.setInvalid(invalid);
-        }
+        this.invalid = invalid;
+        getElement().executeJs(String.format("%s.invalid=$0", TEXTFIELD_SELECTOR), invalid);
     }
 
     @Override
     public void focus() {
-        if (textField != null) {
-            textField.focus();
-        }
+        getElement().executeJs(String.format("%s.focus();", TEXTFIELD_SELECTOR));
     }
 
     @Override
     public void blur() {
-        if (textField != null) {
-            textField.blur();
-        }
+        getElement().executeJs(String.format("%s.blur();", TEXTFIELD_SELECTOR));
     }
 
     @Override
     public void setTabIndex(int tabIndex) {
-        if (textField != null) {
-            textField.setTabIndex(tabIndex);
-        }
+        this.tabIndex = tabIndex;
+        getElement().executeJs(String.format("%s.tabindex=$0", TEXTFIELD_SELECTOR), tabIndex);
     }
 
     @Override
     public int getTabIndex() {
-        return textField.getTabIndex();
+        return this.tabIndex;
     }
 
     @Override
     public ShortcutRegistration addFocusShortcut(Key key,
             KeyModifier... keyModifiers) {
-        return textField.addFocusShortcut(key, keyModifiers);
+        return UI.getCurrent().addShortcutListener(
+                () -> getElement().executeJs(String.format("%s.focus();",
+                        TEXTFIELD_SELECTOR)), key, keyModifiers);
     }
 }
