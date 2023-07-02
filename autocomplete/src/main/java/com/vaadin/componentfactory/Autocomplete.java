@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.vaadin.componentfactory.Autocomplete.AutocompleteValueAppliedEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -23,7 +22,6 @@ import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
-import com.vaadin.flow.component.polymertemplate.EventHandler;
 import com.vaadin.flow.shared.Registration;
 
 import elemental.json.JsonArray;
@@ -59,20 +57,21 @@ import elemental.json.impl.JreJsonFactory;
  * @author Vaadin Ltd
  */
 @Tag("vcf-autocomplete")
-@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "1.2.10")
+@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "24.1.1")
 @JsModule("@vaadin-component-factory/vcf-autocomplete/src/vcf-autocomplete.js")
 public class Autocomplete extends Component implements HasTheme, HasSize,
-        HasValue<AutocompleteValueAppliedEvent, String>,
+        HasValue<Autocomplete.AutocompleteValueAppliedEvent, String>,
         Focusable<Autocomplete>, HasValidation {
 
     // PROPERTIES
-    private static final String VALUE_PROP = "value";
+    private static final String OPTIONS = "options";
+    private static final String TEXTFIELD_SELECTOR = "this._textField";
     private static final String LIMIT_PROP = "limit";
     private static final String LOADING_PROP = "loading";
     private static final String LABEL_PROP = "label";
     private static final String PLACEHOLDER_PROP = "placeholder";
+    private static final String VALUE_PROP = "value";
     private static final String CASESENSITIVE_PROP = "caseSensitive";
-    private static final String OPTIONS = "options";
 
     // Component state attributes
     private boolean readOnly;
@@ -81,17 +80,10 @@ public class Autocomplete extends Component implements HasTheme, HasSize,
     private int tabIndex;
     private String errorMessage;
 
-    // ShadowRoot selector
-    private static final String TEXTFIELD_SELECTOR = "this.$.textField";
-
     /**
      * Default constructor.
      */
-    public Autocomplete() {
-        getElement().executeJs(String.format("textFieldStyles = %s.style;%s%s",
-                TEXTFIELD_SELECTOR, "textFieldStyles.width='100%';",
-                "textFieldStyles.height='100%';"));
-    }
+    public Autocomplete() {}
 
     /**
      * Constructor that sets the maximum number of displayed options.
@@ -121,6 +113,7 @@ public class Autocomplete extends Component implements HasTheme, HasSize,
      *
      * @param options Hints/options to the user
      */
+
     public void setOptions(List<String> options) {
         JsonFactory jsonFactory = new JreJsonFactory();
         JsonArray jsonArray = jsonFactory.createArray();
@@ -291,11 +284,6 @@ public class Autocomplete extends Component implements HasTheme, HasSize,
     public Registration addValueClearListener(
             ComponentEventListener<ValueClearEvent> listener) {
         return addListener(ValueClearEvent.class, listener);
-    }
-
-    @EventHandler
-    public void clear() {
-        fireEvent(new ValueClearEvent(this, true));
     }
 
     /**
