@@ -6,18 +6,19 @@
 	<groupId>com.vaadin.componentfactory</groupId>
 	<artifactId>autocomplete-root</artifactId>
 	<packaging>pom</packaging>
-	<version>2.3.3</version>
+	<version>24.1.1</version>
 	<name>Autocomplete Root</name>
-	<inceptionYear>2018</inceptionYear>
+	<inceptionYear>2023</inceptionYear>
 	<organization>
 		<name>Vaadin Ltd</name>
 		<url>http://vaadin.com/</url>
 	</organization>
 
 	<properties>
-		<vaadin.version>14.9.4</vaadin.version>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<vaadin.version>24.1.1</vaadin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
@@ -31,6 +32,13 @@
 		<repository>
 			<id>vaadin-prereleases</id>
 			<url>https://maven.vaadin.com/vaadin-prereleases</url>
+		</repository>
+		<repository>
+			<id>Vaadin Directory</id>
+			<url>https://maven.vaadin.com/vaadin-addons</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 

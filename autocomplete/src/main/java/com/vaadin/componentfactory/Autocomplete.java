@@ -57,7 +57,7 @@ import elemental.json.impl.JreJsonFactory;
  * @author Vaadin Ltd
  */
 @Tag("vcf-autocomplete")
-@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "24.1.1")
+@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "24.0.0")
 @JsModule("@vaadin-component-factory/vcf-autocomplete/src/vcf-autocomplete.js")
 public class Autocomplete extends Component implements HasTheme, HasSize,
         HasValue<Autocomplete.AutocompleteValueAppliedEvent, String>,
