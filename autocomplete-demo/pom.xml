@@ -6,7 +6,7 @@
     <groupId>com.vaadin.componentfactory</groupId>
     <artifactId>autocomplete-demo</artifactId>
     <packaging>war</packaging>
-    <version>24.1.1</version>
+    <version>24.1.4</version>
     <name>Autocomplete Demo</name>
     <inceptionYear>2023</inceptionYear>
 
@@ -81,6 +81,7 @@
                 <version>11.0.15</version>
                 <configuration>
                     <scanIntervalSeconds>1</scanIntervalSeconds>
+                    <vaadin.frontend.hotdeploy>true</vaadin.frontend.hotdeploy>
                 </configuration>
             </plugin>
             <plugin>
@@ -121,6 +122,9 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <configuration>
+                            <frontendHotdeploy>true</frontendHotdeploy>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
