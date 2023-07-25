@@ -53,9 +53,8 @@ import elemental.json.impl.JreJsonFactory;
  */
 @Tag("vcf-autocomplete")
 @NpmPackage(value = "@lit-labs/observers", version = "2.0.0")
-@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "24.1.4")
+@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "24.1.5")
 @JsModule("@vaadin-component-factory/vcf-autocomplete/src/vcf-autocomplete.js")
-
 public class Autocomplete extends Component implements HasTheme, HasSize,
         HasValue<Autocomplete.AutocompleteValueAppliedEvent, String>,
         Focusable<Autocomplete>, HasValidation {
@@ -66,6 +65,7 @@ public class Autocomplete extends Component implements HasTheme, HasSize,
     private static final String LABEL_PROP = "label";
     private static final String PLACEHOLDER_PROP = "placeholder";
     private static final String VALUE_PROP = "value";
+    private static final String ENABLED_PROP = "enabled";
 
     private boolean invalid;
     private boolean readOnly;
@@ -108,6 +108,16 @@ public class Autocomplete extends Component implements HasTheme, HasSize,
     @Override
     public boolean isInvalid() {
         return this.invalid;
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        this.getElement().setProperty(ENABLED_PROP, enabled);
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.getElement().getProperty(ENABLED_PROP, true);
     }
 
     public String getPlaceholderString() {
