@@ -17,6 +17,8 @@ import com.vaadin.flow.component.Synchronize;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
+import com.vaadin.flow.component.shared.HasPrefix;
+import com.vaadin.flow.component.shared.HasSuffix;
 import com.vaadin.flow.shared.Registration;
 
 import elemental.json.JsonArray;
@@ -57,7 +59,7 @@ import elemental.json.impl.JreJsonFactory;
 @JsModule("@vaadin-component-factory/vcf-autocomplete/src/vcf-autocomplete.js")
 public class Autocomplete extends Component implements HasTheme, HasSize,
         HasValue<Autocomplete.AutocompleteValueAppliedEvent, String>,
-        Focusable<Autocomplete>, HasValidation {
+        Focusable<Autocomplete>, HasValidation, HasPrefix, HasSuffix {
     private static final String OPTIONS = "options";
     private static final String TEXTFIELD_SELECTOR = "this._textField";
     private static final String LIMIT_PROP = "limit";
