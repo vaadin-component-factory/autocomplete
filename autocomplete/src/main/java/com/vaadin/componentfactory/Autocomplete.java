@@ -17,6 +17,11 @@ import com.vaadin.flow.component.Synchronize;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
+import com.vaadin.flow.component.littemplate.LitTemplate;
+import com.vaadin.flow.component.shared.HasPrefix;
+import com.vaadin.flow.component.shared.HasSuffix;
+import com.vaadin.flow.component.template.Id;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.shared.Registration;
 
 import elemental.json.JsonArray;
@@ -55,9 +60,9 @@ import elemental.json.impl.JreJsonFactory;
 @NpmPackage(value = "@lit-labs/observers", version = "2.0.0")
 @NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "24.1.6")
 @JsModule("@vaadin-component-factory/vcf-autocomplete/src/vcf-autocomplete.js")
-public class Autocomplete extends Component implements HasTheme, HasSize,
+public class Autocomplete extends LitTemplate implements HasTheme, HasSize,
         HasValue<Autocomplete.AutocompleteValueAppliedEvent, String>,
-        Focusable<Autocomplete>, HasValidation {
+        Focusable<Autocomplete>, HasValidation, HasPrefix, HasSuffix {
     private static final String OPTIONS = "options";
     private static final String TEXTFIELD_SELECTOR = "this._textField";
     private static final String LIMIT_PROP = "limit";
@@ -73,6 +78,9 @@ public class Autocomplete extends Component implements HasTheme, HasSize,
 
     private String errorMessage;
 
+    @Id("textField")
+    private TextField textField;
+
     public Autocomplete() {
         this.readOnly = false;
         /* //TODO
@@ -81,13 +89,16 @@ public class Autocomplete extends Component implements HasTheme, HasSize,
                 "textFieldStyles.height='100%';"));
          */
     }
+
     public Autocomplete(int limit) {
         this();
         setLimit(limit);
     }
+
     public void setLimit(int limit) {
         getElement().setProperty(LIMIT_PROP, limit);
     }
+
     @Override
     public void setErrorMessage(String s) {
         this.errorMessage = errorMessage;
@@ -232,6 +243,7 @@ public class Autocomplete extends Component implements HasTheme, HasSize,
         return this.readOnly;
 
     }
+
     @Override
     public void setRequiredIndicatorVisible(boolean requiredIndicatorVisible) {
         this.requiredIndicatorVisible = requiredIndicatorVisible;
@@ -256,4 +268,23 @@ public class Autocomplete extends Component implements HasTheme, HasSize,
     }
 
 
+    @Override
+    public void setPrefixComponent(Component component) {
+        this.textField.setPrefixComponent(component);
+    }
+
+    @Override
+    public Component getPrefixComponent() {
+        return this.textField.getPrefixComponent();
+    }
+
+    @Override
+    public void setSuffixComponent(Component component) {
+        this.textField.setSuffixComponent(component);
+    }
+
+    @Override
+    public Component getSuffixComponent() {
+        return this.textField.getSuffixComponent();
+    }
 }
