@@ -1,18 +1,20 @@
 package com.vaadin.componentfactory.demo;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.vaadin.componentfactory.Autocomplete;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.H4;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 @PageTitle("Basic Demo")
@@ -43,6 +45,15 @@ public class AutocompleteView extends HorizontalLayout {
         Autocomplete autocomplete = new Autocomplete(5);
         autocomplete.setOptions(allOptions);
 
+        autocomplete.setLabel("Find what you want:");
+        autocomplete.setPlaceholder("search ...");
+
+        autocomplete.setWidth("300px");
+        autocomplete.setThemeName("my-autocomplete");
+
+        autocomplete.setSuffixComponent(VaadinIcon.SEARCH.create());
+        autocomplete.setPrefixComponent(new Span("Input: "));
+
         autocomplete.addChangeListener(event -> {
             String text = event.getValue();
             autocomplete.setOptions(findOptions(text));
@@ -56,12 +67,6 @@ public class AutocompleteView extends HorizontalLayout {
         autocomplete.addValueClearListener(event -> {
             selectionH3.setText("Selection: " + "");
         });
-
-        autocomplete.setLabel("Find what you want:");
-        autocomplete.setPlaceholder("search ...");
-
-        autocomplete.setWidth("300px");
-        autocomplete.setThemeName("my-autocomplete");
 
         Checkbox startsWithBox = new Checkbox("startsWith / contains");
         startsWithBox.setValue(true);
@@ -79,7 +84,8 @@ public class AutocompleteView extends HorizontalLayout {
         add(new VerticalLayout(
                 new H3("Basic Autocomplete"),
                 new HorizontalLayout(inputH4,selectionH3),
-                new HorizontalLayout(autocomplete)
+                new HorizontalLayout(autocomplete),
+                new HorizontalLayout(startsWithBox, readOnlyBox)
         ));
         autocomplete.focus();
     }
