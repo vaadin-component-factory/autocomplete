@@ -224,7 +224,7 @@ public class Autocomplete extends LitTemplate implements HasTheme, HasSize,
     }
 
     public void setValue(String value) {
-        getElement().executeJs("this._setValue(\"" + value + "\");");
+        getElement().callJsFunction("_setValue", value);
     }
 
     @Synchronize(property = VALUE_PROP, value = "value-changed")
