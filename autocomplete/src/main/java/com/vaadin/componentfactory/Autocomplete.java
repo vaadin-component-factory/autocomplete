@@ -55,7 +55,7 @@ import com.vaadin.flow.shared.Registration;
  */
 @Tag("vcf-autocomplete")
 @NpmPackage(value = "@lit-labs/observers", version = "2.0.0")
-@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "24.1.6")
+@NpmPackage(value = "@vaadin-component-factory/vcf-autocomplete", version = "3.0.0")
 @JsModule("@vaadin-component-factory/vcf-autocomplete/src/vcf-autocomplete.js")
 public class Autocomplete extends LitTemplate implements HasTheme, HasSize,
         HasValue<Autocomplete.AutocompleteValueAppliedEvent, String>,
