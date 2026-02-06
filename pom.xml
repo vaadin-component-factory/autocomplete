@@ -8,7 +8,7 @@
 	<packaging>pom</packaging>
 	<version>5.0.0-SNAPSHOT</version>
 	<name>Autocomplete Root</name>
-	<inceptionYear>2023</inceptionYear>
+	<inceptionYear>2018</inceptionYear>
 	<organization>
 		<name>Vaadin Ltd</name>
 		<url>http://vaadin.com/</url>
