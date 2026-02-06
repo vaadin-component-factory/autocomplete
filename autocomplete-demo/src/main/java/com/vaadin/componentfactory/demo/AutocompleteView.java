@@ -22,7 +22,7 @@ import com.vaadin.flow.router.RouteAlias;
 @RouteAlias(value = "")
 public class AutocompleteView extends HorizontalLayout {
 
-    private List<String> allOptions = Arrays.asList("Mozzarella", "Rucula", "Garlic");;
+    private List<String> allOptions = Arrays.asList("Mozzarella", "Rucula", "Garlic");
     private boolean startsWith = true;
     private List<String> findOptions(final String text) {
         String matchText = text.trim().toLowerCase();
