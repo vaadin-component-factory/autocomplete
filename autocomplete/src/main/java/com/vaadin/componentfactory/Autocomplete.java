@@ -2,7 +2,8 @@ package com.vaadin.componentfactory;
 
 import java.util.List;
 import java.util.Objects;
-
+import tools.jackson.databind.node.ArrayNode;
+import tools.jackson.databind.node.JsonNodeFactory;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -23,10 +24,6 @@ import com.vaadin.flow.component.shared.HasSuffix;
 import com.vaadin.flow.component.template.Id;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.shared.Registration;
-
-import elemental.json.JsonArray;
-import elemental.json.JsonFactory;
-import elemental.json.impl.JreJsonFactory;
 
 /*
  * #%L
@@ -150,12 +147,13 @@ public class Autocomplete extends LitTemplate implements HasTheme, HasSize,
     }
 
     public void setOptions(List<String> options) {
-        JsonFactory jsonFactory = new JreJsonFactory();
-        JsonArray jsonArray = jsonFactory.createArray();
-        for (int i = 0; i < options.size(); i++) {
-            jsonArray.set(i, options.get(i));
-        }
-        getElement().setPropertyJson(OPTIONS, jsonArray);
+      ArrayNode arrayNode = JsonNodeFactory.instance.arrayNode();
+      if (options != null) {
+          for (String option : options) {
+              arrayNode.add(option);
+          }
+      }
+      getElement().setPropertyJson(OPTIONS, arrayNode);
     }
 
     public Registration addChangeListener(
