@@ -23,6 +23,7 @@
         <vaadin.version>25.0.3</vaadin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <frontend.hotdeploy>true</frontend.hotdeploy>
     </properties>
 
     <dependencyManagement>
@@ -78,10 +79,9 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>11.0.15</version>
+                <version>11.0.26</version>
                 <configuration>
-                    <scanIntervalSeconds>1</scanIntervalSeconds>
-                    <vaadin.frontend.hotdeploy>true</vaadin.frontend.hotdeploy>
+                    <scan>1</scan>
                 </configuration>
             </plugin>
             <plugin>
