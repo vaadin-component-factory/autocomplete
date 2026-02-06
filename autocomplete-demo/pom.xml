@@ -44,6 +44,11 @@
             <artifactId>vaadin-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-dev</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>com.vaadin.componentfactory</groupId>
             <artifactId>autocomplete</artifactId>
             <version>${project.version}</version>
