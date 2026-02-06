@@ -9,8 +9,21 @@ vaadin-crud-flow-integration-tests/error-screenshots/
 **/frontend/generated/
 **/vite.generated.ts
 
+.eclipse
+.vscode
+
+.project
+.settings
+.classpath
+
 # The following files are generated/updated by flow-maven-plugin
 package*.json
 webpack.*.js
 node_modules/
 dev-bundle/
+/autocomplete-demo/vite.generated.ts
+/autocomplete-demo/vite.config.ts
+/autocomplete-demo/tsconfig.json
+/autocomplete-demo/types.d.ts
+/autocomplete-demo/src/main/bundles/
+
